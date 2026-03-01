@@ -17,7 +17,10 @@ print(f"Source folder: {source_dir}")
 print("Destination folders:", dest_dirs)
 
 log_file = os.path.join(dest_dirs["documents"], "file_log.csv")
-
+if not os.path.exists(log_file):
+    with open(log_file, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Filename", "Original Path", "New Path", "Timestamp"])
 #making the missing folders
 for folder in dest_dirs.values():
     os.makedirs(folder, exist_ok=True)
